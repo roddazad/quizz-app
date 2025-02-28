@@ -36,3 +36,24 @@ const questions = [
         ]
     }
 ];
+function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    scoreDisplay.textContent = `Score: ${score}`;
+    nextButton.style.display = "none";
+    showQuestion();
+}
+
+function showQuestion() {
+    resetState();
+    let currentQuestion = questions[currentQuestionIndex];
+    questionElement.textContent = currentQuestion.question;
+    
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.textContent = answer.text;
+        button.classList.add("btn");
+        button.addEventListener("click", () => selectAnswer(button, answer.correct));
+        answerButtons.appendChild(button);
+    });
+}
