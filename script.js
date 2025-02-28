@@ -57,3 +57,29 @@ function showQuestion() {
         answerButtons.appendChild(button);
     });
 }
+function resetState() {
+    nextButton.style.display = "none";
+    answerButtons.innerHTML = "";
+}
+function selectAnswer(button, isCorrect) {
+    if (isCorrect) {
+        score++;
+        scoreDisplay.textContent = `Score: ${score}`;
+    }
+    Array.from(answerButtons.children).forEach(btn => {
+        btn.disabled = true;
+    });
+    nextButton.style.display = "block";
+}
+nextButton.addEventListener("click", () => {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        showQuestion();
+    } else {
+        questionElement.textContent = "Quiz Completed!";
+        answerButtons.innerHTML = "";
+        nextButton.style.display = "none";
+    }
+});
+
+startQuiz();
